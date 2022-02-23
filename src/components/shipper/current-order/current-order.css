@@ -1,0 +1,8 @@
+.ant-statistic-content, .ant-statistic-title {
+    display: flex;
+    justify-content: center;
+}
+
+.ant-steps-item-description {
+    max-width: 300px !important;
+}

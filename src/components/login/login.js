@@ -14,12 +14,14 @@ export default function Login(props) {
     const onFinish = (values) => {
         AuthService.login(values.username, values.password).then(
             (response) => {
-              if (response.roles[0].authority != "ROLE_ADMIN"){
+              if (response.roles[0].authority != "ROLE_SHIPPER"){
                 message.error("Bạn đã nhập sai tên hoặc mật khẩu, vui lòng nhập lại !");
               } else {
+            console.log(response);
+              localStorage.setItem("user", JSON.stringify(response));
               message.success("Bạn đã đăng nhập thành công !");
               setTimeout(() => {
-                history.push("/manage");
+                history.push("/shipper");
                 window.location.reload();
               }, 1500);
             }
@@ -53,7 +55,7 @@ export default function Login(props) {
                     form={form}
                 >
                     <Form.Item
-                        label={<span style={{color : "white"}}>Username</span>}
+                        label={<span style={{color : "white"}}>Tên đăng nhập</span>}
                         name="username"
                         rules={[
                             {
@@ -66,7 +68,7 @@ export default function Login(props) {
                     </Form.Item>
 
                     <Form.Item
-                        label={<span style={{color : "white"}}>Password</span>}
+                        label={<span style={{color : "white"}}>Mật khẩu</span>}
                         name="password"
                         rules={[
                             {
@@ -89,7 +91,6 @@ export default function Login(props) {
                         </Button>
                     </Form.Item>
                 </Form>
-                <p style={{textAlign : "center"}}><a href="#">Quên mật khẩu ?</a></p>
             </div>
         </section>
     );

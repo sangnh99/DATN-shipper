@@ -10,10 +10,10 @@ class AuthService {
         password
       })
       .then(response => {
-        if (response.data.accessToken) {
-          localStorage.setItem("user", JSON.stringify(response.data));
-          // console.log("Localstorage get user" + localStorage.getItem('user'));
-        }
+        // if (response.data.accessToken) {
+        //   localStorage.setItem("user", JSON.stringify(response.data));
+        //   // console.log("Localstorage get user" + localStorage.getItem('user'));
+        // }
 
         return response.data;
       });

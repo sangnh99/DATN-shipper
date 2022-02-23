@@ -4,8 +4,9 @@ import 'antd/dist/antd.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 // import logo from './logo.svg';
 import authService from './services/auth.service';
-import {Modal} from 'antd';
+import { Modal } from 'antd';
 import Login from './components/login/login';
+import ShipperPage from './components/shipper/shipper-page';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
   useEffect(() => {
     const user = authService.getCurrentUser();
-    if (user){
+    if (user) {
       setCurrentUser(user);
     }
   }, []);
@@ -29,48 +30,53 @@ function App() {
     <div className="App">
 
       <Router>
-      {/* <Modal title="Basic Modal" visible={validateModal} onOk={handleOkValidateModal} onCancel={handleCancelValidateModal}>
+        {/* <Modal title="Basic Modal" visible={validateModal} onOk={handleOkValidateModal} onCancel={handleCancelValidateModal}>
         <p>Vui lòng đăng nhập để mở trang này !</p>
       </Modal> */}
 
-      <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
-        <Link to={"/"} className="navbar-brand">
-          SangOrder
-        </Link>
-        <div className="navbar-nav mr-auto">
-          <li className="nav-item">
-            <Link to={"/manage"} className="nav-link">
-              Quản lí
-            </Link>
-          </li>
-        </div>
+        <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
+          <Link to={"/"} className="navbar-brand">
+            SangOrder-Shipper
+          </Link>
+          {
+            currentUser != null && (
+              <div className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link to={"/shipper"} className="nav-link">
+                    Shipper
+                  </Link>
+                </li>
+              </div>
+            )
+          }
 
-        {currentUser != null ? (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/user"} className="nav-link">
-                {currentUser.username}
-              </Link>
-            </li>
-            <li className="nav-item">
-              <a href="/login" className="nav-link" onClick={logOut}>
-                Đăng xuất
-              </a>
-            </li>
-          </div>
-        ) : (
-          <div className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link to={"/login"} className="nav-link">
-                Đăng nhập
-              </Link>
-            </li>
-          </div>
-        )}
-      </nav>
+          {currentUser != null ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                  {currentUser.username}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={logOut}>
+                  Đăng xuất
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Đăng nhập
+                </Link>
+              </li>
+            </div>
+          )}
+        </nav>
 
         <Switch>
           <Route path="/login" component={Login} />
+          <Route path="/shipper" component={ShipperPage} />
           {/* <Route path="/manage" component={AdminPage} />
           <Route path="/login" component={Login} />
           <Route path="/error-page" component={ErrorPage} /> */}
