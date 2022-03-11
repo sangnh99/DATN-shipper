@@ -7,7 +7,7 @@ import authService from './services/auth.service';
 import { Modal } from 'antd';
 import Login from './components/login/login';
 import ShipperPage from './components/shipper/shipper-page';
-
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   const location = useLocation();
@@ -36,14 +36,14 @@ function App() {
 
         <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
           <Link to={"/"} className="navbar-brand">
-            SangOrder-Shipper
+            SangShipper
           </Link>
           {
             currentUser != null && (
               <div className="navbar-nav mr-auto">
                 <li className="nav-item">
                   <Link to={"/shipper"} className="nav-link">
-                    Shipper
+                    Giao hàng
                   </Link>
                 </li>
               </div>
@@ -76,7 +76,7 @@ function App() {
 
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/shipper" component={ShipperPage} />
+          <PrivateRoute path="/shipper" component={ShipperPage} />
           {/* <Route path="/manage" component={AdminPage} />
           <Route path="/login" component={Login} />
           <Route path="/error-page" component={ErrorPage} /> */}
